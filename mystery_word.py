@@ -1,11 +1,16 @@
+
+
 import random
 easy_words
+
+
 
 def easy_words(word_list):
     """
     Returns a filtered version of the word list with words only containing
     4-6 characters.
     """
+
     for w in word_list:
         if len(w) >= 4 and len(w) <= 6:
             list.append
@@ -14,15 +19,23 @@ def easy_words(word_list):
     # TODO  choose only 4-6 letter words
     #   randomly choose one word to pass
 
+    # TODO
+    pass
+
+
+
 def medium_words(word_list):
     """
     Returns a filtered version of the word list with words only containing
     6-8 characters.
     """
+
+
     for w in word_list:
         if len(w) >= 6 and len (w)<= 8:
             list.append
     return list
+
 
     # TODO
     pass
@@ -33,10 +46,13 @@ def hard_words(word_list):
     Returns a filtered version of the word list with words only containing
     8+ characters.
     """
+
+
     for w in word_list:
         if len(w) >= 8:
             list.append
     return list
+
 
     # TODO
     pass
@@ -46,8 +62,10 @@ def random_word(word_list):
     """
     Returns a random word from the word list.
     """
+
     word = random.choice(list)
     return list
+
 
     # TODO
     pass
@@ -64,7 +82,9 @@ def display_word(word, guesses):
     For example, if the word is BOMBARD and the letters guessed are a, b,
     and d, this function should return 'B _ _ B A _ D'.
     """
+
     return
+
     # TODO
     pass
 
@@ -84,6 +104,7 @@ def main():
 
     1. Prompts the user for a difficulty level
 
+
     2. Sets up the game based upon the difficulty level
     3. Performs the game loop, consisting of:
        a. Printing the word in progress, using _ for unguessed letters
@@ -93,6 +114,7 @@ def main():
     4. Finishing the game and displaying whether the user has won or lost
     5. Giving the user the option to play again
     """
+
     f = open("/usr/share/dict/words")
     word_list = f.read
     print(word_list(10))
@@ -120,3 +142,9 @@ def main():
 #
 # if __name__ == '__main__':
 #     main()
+
+    # TODO
+
+
+if __name__ == '__main__':
+    main()
