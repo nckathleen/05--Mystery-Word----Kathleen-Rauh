@@ -41,6 +41,22 @@ def random_word(word_list):
     return random.choice(word_list)
 
 
+def get_input()
+    level = input("Choose a difficulty level of (E)asy, (M)edium or (H)ard: ").lower
+    if len(level) > 1 or :
+        print("You must choose (E), (M) or (H).  You can enter Q to quit the game.")
+        get_input
+    if level == 'e':
+        easy_word(word_list)
+    elif level == 'm':
+        medium_word(word_list)
+    elif level == 'h':
+        hard_word(word_list)
+    elif level == 'q':
+        break
+    else:
+        print("You must choose (E), (M) or (H).  You can enter Q to quit the game."))
+
 
 def display_word(word, guesses):
     """
@@ -89,20 +105,6 @@ def main():
     get_input()
     set_up_game(word_list):
 
-
-    def get_input()
-        level = input("Choose a difficulty level of (E)asy, (M)edium or (H)ard: ")
-        if len(level) > 1:
-            print("You must choose (E), (M) or (H).  You can enter Q to quit the game.")
-            get_input
-        if level == 'E':
-            easy_word(word_list)
-        elif level == 'M':
-            medium_word(word_list)
-        elif:
-            hard_word(word_list)
-        else:
-            break
 
 
 #   #   Set up game using Level, incl a,b,c,d
