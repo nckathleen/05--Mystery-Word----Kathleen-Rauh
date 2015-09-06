@@ -1,6 +1,5 @@
 import random
 import sys
-easy_words
 
 def easy_words(words):
     """
@@ -42,25 +41,32 @@ def random_word(words):
     return random.choice(words)
 
 
-def display_word(word, guesses):
+def play again():
+
+    print("Congratulations!  You successfully guessed the word!\nWould you like to play again?")
+    answer = input(" (Y)es or (N)o: ").lower()
+    if answer in ('y', 'yes'):
+        choose_level
+    else:
+        sys.exit(0)
+    return
+
+
+def display_word(mystery_word, guesses):
     """
     Returns a string that including blanks (_) and letters from the given word,
     filling in letters based upon the list of guesses.
-
-    There should be spaces between each blank _ and each letter. Each letter
-    should be capitalized for display.
-
-    For example, if the word is BOMBARD and the letters guessed are a, b,
-    and d, this function should return 'B _ _ B A _ D'.
     """
-    while bad_guess < 8:
-        for letter in word:
-            if guess in word
-                display letter.upper()
-            else:
-                display = "_ "
-                bad_guess += 1
-    return
+    guesses.append(guess)
+    print("You have {} guesses left.".format(chances))
+    print("So far, you have guessed these letters: {} {}".format(guesses, ' '))
+    for letter in mystery_word:
+        if guess not in guesses
+            display.append(letter.upper())
+        else:
+            display.append('_')
+            chances -= 1
+    return ' '.join(display)
 
 
 def is_word_complete(word, guesses):
@@ -68,39 +74,47 @@ def is_word_complete(word, guesses):
     Returns True if the list of guesses covers every letter in the word,
     otherwise returns False.
     """
-    if guesses == len(word):
-        print("Congratulations!  You guessed the word!\nWould you like to play again?")
-        answer = input(" (Y)es or (N)o: ")
-        if answer in ('y', 'yes', 'n', 'no'):
-            choose_level
-        else:
-            sys.exit(0)
+    for letter in mystery_word:
+        if letter not in guesses:
+            win_switch = False
+    return win_switch
 
 
-def set_up_game(mystery_word):
-    display = ''
-    guesses = []
-    wrong = 0
-    word_len = len(mystery_word)
-    print(("Good luck! The word has {} letters in it.").format(word_len))
-    guess = input("Please enter your first letter guess: ").upper()
-    guesses = guesses.append(guess)
-    return (guesses, word)
+def set_up_game(level):
+    guesses = []    # letters that have been guessed
+    chances = 8     # number of allowed guesses
+    win_switch = True
+    if level in ('E', 'e'):
+        mystery_word = random_word(easy_list)
+    elif level in ('M', 'm'):
+        mystery_word = random_word(medium_list)
+    elif level in ('H' ,'h'):
+        mystery_word = random_word(hard_list)
+    else:
+        print("That is not valid input.")
+        choose_level()
+    print(("\nGood luck! The word I have chosen for you has {} letters in it.").format(len(mystery_word)))
+    get_user_guess()
+    return(guesses, chances, mystery_word)
+
+
+def get_user_guess():
+    guess = input("\nPlease guess a letter: ").upper()
+    if guess in guesses:
+        print("\nYou have already guessed that letter")
+        get_user_input
+    else:
+        continue
+    return(guess)
 
 
 def choose_level():
-    level = input("Choose a difficulty level of (E)asy, (M)edium or (H)ard. (Q) = Quit: ").lower()
-    if level == 'q':
+    level = input("Choose a difficulty level of (E)asy, (M)edium or (H)ard. (Q) = Quit: ")
+    if level in ('Q', 'q'):
         sys.exit(0)
-    elif level == 'e':
-        mystery_word = random_word(easy_list)
-    elif level == 'm':
-        mystery_word = random_word(medium_list)
-    elif level == 'h':
-        mystery_word = random_word(hard_list)
     else:
-        choose_level()
-    return(mystery_word)
+        set_up_game
+    return(level)
 
 
 def main():
@@ -109,7 +123,7 @@ def main():
 
     1. Prompts the user for a difficulty level              #choose_level
     2. Sets up the game based upon the difficulty level     #set_up_game
-    3. Performs the game loop, consisting of:               #display_word
+    3. Performs the game loop, consisting of:               #game_loop
        a. Printing the word in progress, using _ for unguessed letters
        b. Printing the number of guesses remaining
        c. Printing the letters that have been guessed so far
@@ -123,31 +137,6 @@ def main():
     choose_level()
     set_up_game(words)
     display_word()
-
-
-#   #   Set up game using Level, incl a,b,c,d
-#   a) rtn = ''
-#   for letter in self.word:
-#   	if letter not in self.guessed_letters:
-#   		rtn += '_'
-#   	else:
-#   		rtn += letter
-#   return rtn
-#    b) & c)     def print_game_status(self):
-# # #		 while (count != guessedLetter): #while loop to look for the index of the guessed letter
-    #         count = count + 1
-    #         if (count == guessedLetter): # will go into the board and replace the desired index with the letter if it matches
-    #             theBoard[count] = letter
-    #             print("The word is: " + ''.join(theBoard))
-    #
-    # for x in theBoard: # loop to go through theBoard to see if any '*' are there. If none are found it will say you win
-    #     if (x != '*'):
-    #         win += 1
-    # if (win == len(theBoard)):
-    #     print("You win!")
-#    d)  while True, x = input(make_choice), if bad msg, continue, if 'Q' break
-#     # Call approp function for level chosen, passing ??
-#
 
 
 if __name__ == '__main__':
