@@ -1,61 +1,45 @@
 import random
+import sys
 easy_words
 
-def easy_words(word_list):
+def easy_words(words):
     """
     Returns a filtered version of the word list with words only containing
     4-6 characters.
     """
-    for w in word_list:
+    for w in words:
         if len(w) > 3 and len(w) < 7:
-            list.append
-    return list
+            easy_list.append(w)
+    return easy_list
 
 
-def medium_words(word_list):
+def medium_words(words):
     """
     Returns a filtered version of the word list with words only containing
     6-8 characters.
     """
-    for w in word_list:
+    for w in words:
         if len(w) > 5 and len(w) <9:
-            list.append
-    return list
+            medium_list.append(w)
+    return medium_list
 
 
-def hard_words(word_list):
+def hard_words(words):
     """
     Returns a filtered version of the word list with words only containing
     8+ characters.
     """
-    for w in word_list:
+    for w in words:
         if len(w) > 7:
-            list.append
-    return list
+            hard_list.append(w)
+    return hard_list
 
 
-def random_word(word_list):
+def random_word(words):
     """
     Returns a random word from the word list.
     """
-    return random.choice(word_list)
-
-
-def get_input()
-    level = input("Choose a difficulty level of (E)asy, (M)edium or (H)ard: ").lower
-    if len(level) > 1 or :
-        print("You must choose (E), (M) or (H).  You can enter Q to quit the game.")
-        get_input
-    if level == 'e':
-        easy_word(word_list)
-    elif level == 'm':
-        medium_word(word_list)
-    elif level == 'h':
-        hard_word(word_list)
-    elif level == 'q':
-        break
-    else:
-        print("You must choose (E), (M) or (H).  You can enter Q to quit the game."))
+    return random.choice(words)
 
 
 def display_word(word, guesses):
@@ -69,7 +53,13 @@ def display_word(word, guesses):
     For example, if the word is BOMBARD and the letters guessed are a, b,
     and d, this function should return 'B _ _ B A _ D'.
     """
-
+    while bad_guess < 8:
+        for letter in word:
+            if guess in word
+                display letter.upper()
+            else:
+                display = "_ "
+                bad_guess += 1
     return
 
 
@@ -78,20 +68,48 @@ def is_word_complete(word, guesses):
     Returns True if the list of guesses covers every letter in the word,
     otherwise returns False.
     """
+    if guesses == len(word):
+        print("Congratulations!  You guessed the word!\nWould you like to play again?")
+        answer = input(" (Y)es or (N)o: ")
+        if answer in ('y', 'yes', 'n', 'no'):
+            choose_level
+        else:
+            sys.exit(0)
 
-def set_up_game(list):
-word_len = len(word)
-print("The word has {} letters in it.").format(len(word))
-    guess = input("Please enter your first letter guess: ")
+
+def set_up_game(mystery_word):
+    display = ''
+    guesses = []
+    wrong = 0
+    word_len = len(mystery_word)
+    print(("Good luck! The word has {} letters in it.").format(word_len))
+    guess = input("Please enter your first letter guess: ").upper()
+    guesses = guesses.append(guess)
+    return (guesses, word)
+
+
+def choose_level():
+    level = input("Choose a difficulty level of (E)asy, (M)edium or (H)ard. (Q) = Quit: ").lower()
+    if level == 'q':
+        sys.exit(0)
+    elif level == 'e':
+        mystery_word = random_word(easy_list)
+    elif level == 'm':
+        mystery_word = random_word(medium_list)
+    elif level == 'h':
+        mystery_word = random_word(hard_list)
+    else:
+        choose_level()
+    return(mystery_word)
 
 
 def main():
     """
     Runs when the program is called from the command-line.
 
-    1. Prompts the user for a difficulty level
-    2. Sets up the game based upon the difficulty level
-    3. Performs the game loop, consisting of:
+    1. Prompts the user for a difficulty level              #choose_level
+    2. Sets up the game based upon the difficulty level     #set_up_game
+    3. Performs the game loop, consisting of:               #display_word
        a. Printing the word in progress, using _ for unguessed letters
        b. Printing the number of guesses remaining
        c. Printing the letters that have been guessed so far
@@ -100,11 +118,11 @@ def main():
     5. Giving the user the option to play again
     """
     with open("/usr/share/dict/words") as f:
-        word_list = f.read()
-        word_list = word_list.split()
-    get_input()
-    set_up_game(word_list):
-
+        words = f.read()
+        words = words.split()
+    choose_level()
+    set_up_game(words)
+    display_word()
 
 
 #   #   Set up game using Level, incl a,b,c,d
@@ -129,13 +147,7 @@ def main():
     #     print("You win!")
 #    d)  while True, x = input(make_choice), if bad msg, continue, if 'Q' break
 #     # Call approp function for level chosen, passing ??
-#     #
-#     f.close
 #
-# if __name__ == '__main__':
-#     main()
-
-    # TODO
 
 
 if __name__ == '__main__':
