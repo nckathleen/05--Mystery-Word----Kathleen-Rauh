@@ -48,6 +48,7 @@ def random_word(words):
 
 
 def assemble_word(mystery_word, guesses):
+    # Loop through mystery word, comparing each letter to the guessed letter.
     display = []
     for letter in mystery_word:
         if letter.upper() in guesses or letter.lower() in guesses:
@@ -57,6 +58,7 @@ def assemble_word(mystery_word, guesses):
     return display
 
 def display_word(mystery_word, guesses):
+    # Output display of guessed word in progress.
     """
     Returns a string that including blanks (_) and letters from the given word,
     filling in letters based upon the list of guesses.
@@ -66,17 +68,34 @@ def display_word(mystery_word, guesses):
 
 
 def is_word_complete(mystery_word, guesses):
+    # Checks to see if word has been completed.
     """
     Returns True if the list of guesses covers every letter in the word,
     otherwise returns False.
     """
+    success = False
     guessed_word = assemble_word(mystery_word,guesses)
-    return ''.join(guessed_word).upper() == mystery_word.upper()
+    success = ''.join(guessed_word).upper() == mystery_word.upper()
+    return success
+
+
+def play_game(words):
+    # Manage setup and the looping of the game.
+    level = choose_level()
+    mystery_word = set_up_game(level,words)
+    win_or_lose = game_loop(mystery_word)
+    if win_or_lose == True:
+        print("You guessed the word!!  It was " + mystery_word.upper())
+    else:
+        print("You ran out of guesses!")
+        print("\nThe word was " + mystery_word.upper())
+
 
 def game_loop(mystery_word):
+    # Manage game progress until game ends due to win or out of guesses.
     guesses = []
-    not_finished=True
-    win=False
+    not_finished = True
+    end = False
     chances = 8
     while not_finished:
         print("So far, you have guessed these letters: {} {}".format(guesses, ' '))
@@ -88,14 +107,15 @@ def game_loop(mystery_word):
         guesses.append(guess)
         is_complete = is_word_complete(mystery_word,guesses)
         if is_complete == True:
-            not_finished=False
-            win=True
+            not_finished = False
+            end = True
         elif chances == 0:
-            not_finished=False
-            win=False
-    return win
+            not_finished = False
+            end = False
+    return end
 
 def set_up_game(level,words):
+    # Use input level to get mystery word
     mystery_word = ''
     if level in ('E', 'e'):
         mystery_word = random_word(easy_words(words))
@@ -108,6 +128,7 @@ def set_up_game(level,words):
 
 
 def get_user_guess(guesses):
+    # Gets guess from user and checks to see if it has been guessed before.
     guess = ''
     not_yet=True
     while not_yet:
@@ -120,9 +141,11 @@ def get_user_guess(guesses):
 
 
 def choose_level():
+    #  Asks user which level of difficulty they want.
     while True:
         level = input("Choose a difficulty level of (E)asy, (M)edium or (H)ard. (Q) = Quit: ")
         if level in ('Q', 'q'):
+            print("Maybe we can play some other time.")
             sys.exit(0)
         if level.upper() in ('E', 'M', 'H'):
             break
@@ -130,15 +153,6 @@ def choose_level():
             print("Valid choices are E, M, or H")
     return level
 
-
-def play_game(words):
-    level = choose_level()
-    mystery_word = set_up_game(level,words)
-    win_or_lose = game_loop(mystery_word)
-    if win_or_lose == True:
-        print("You won!")
-    else:
-        print("You ran out of guesses!")
 
 def main():
     """
@@ -163,8 +177,8 @@ def main():
         play_game(words)
         play_again = input("Would you like to play again? (Y)es or (N)o: ")
         if play_again[0] not in ('Y', 'y'):
+            print("Maybe we can play again some other time.")
             next_game = False
-
 
 
 if __name__ == '__main__':
